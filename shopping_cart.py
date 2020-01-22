@@ -29,3 +29,19 @@ print(products)
 # pprint(products)
 
 # TODO: write some Python code here to produce the desired output
+#Set up
+itemCode = '' #Init itemCode
+itemList = [] #Where the serial numbers of the items that are scanned will be stored
+
+#while itemCode.upper() != "DONE":
+    #Get the item code from the command line
+
+    #Don't run any code if DONE is found
+    
+    #if DONE is detected
+        #Receipt will be printed
+    #else
+        #Confirm that the item is in the rpduct list
+            #If it exists, confirm that the item was added to the list
+        #if it does not exist
+            #tell the user that it does not exist
