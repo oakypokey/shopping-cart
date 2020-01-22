@@ -1,7 +1,10 @@
 # shopping_cart.py
 
 #from pprint import pprint
+import os
+import csv
 
+""" 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -24,24 +27,65 @@ products = [
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
+ """
 
-print(products)
+#print(products)
 # pprint(products)
 
 # TODO: write some Python code here to produce the desired output
 #Set up
+
+#I don't like the data structure that was given so I'm creating my own in order to make data processing easier
+class MyItem:
+    def __init__(self,id, name, department, aisle, price):
+        self.id = id
+        self.name = name
+        self.department = department
+        self.aisle = aisle
+        self.price = price
+
+
 itemCode = '' #Init itemCode
 itemList = [] #Where the serial numbers of the items that are scanned will be stored
+itemDictionary = dict() #Where all the products will be stored
 
-#while itemCode.upper() != "DONE":
+
+#Pulling information from csv file and adding it to the dictionary
+##Open the file
+pathName = os.getcwd()
+file = open(os.path.join(pathName, "items.csv"))
+reader = csv.reader(file, delimiter=',')
+
+##Iterate over file, create objects, add to the itemDictionary
+for row in reader:
+    itemDictionary[row[0]] = MyItem(row[0], row[1], row[2], row[3], row[4])
+
+#gotta get rid of that first row
+if "id" in itemDictionary:
+    del itemDictionary["id"]
+
+print(itemDictionary)
+
+def printReceipt(arrayOfItems):
+    print("Receipt goes here")
+
+
+while itemCode.upper() != "DONE":
     #Get the item code from the command line
+    itemCode = input("Input the serial number for the item, or enter DONE if there are no more items left: ")
 
     #Don't run any code if DONE is found
-    
-    #if DONE is detected
+    if itemCode.upper() == "DONE":
         #Receipt will be printed
-    #else
-        #Confirm that the item is in the rpduct list
-            #If it exists, confirm that the item was added to the list
-        #if it does not exist
-            #tell the user that it does not exist
+        printReceipt(itemList)
+        print("DONE detected. Exiting...")
+    else:
+        
+        #Confirm that the item is in the library
+        if itemCode in itemDictionary:
+            #If it exists, confirm
+            print(itemDictionary[itemCode].name + " was added to the basket")
+            itemList.append(itemCode)
+        else:
+            #If not, tell the user that it does not exist
+            print("Item does not exist. Please add to inventory list")
