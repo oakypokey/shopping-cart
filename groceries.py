@@ -51,27 +51,34 @@ def printItemList(productsArray):
 
 def getDepartments(productsArray):
     #Pre-processing
-    ## Filter function
+    ## Filter function and result array
     uniqueDepartments = []
+    departmentList = []
 
-    def doesExist(department):
-        if department in uniqueDepartments:
-            return False
-        else:
-            return True
+    def addToUniqueDepartments(department):
+        if not (str(department) in uniqueDepartments):
+            uniqueDepartments.append(department)
 
-    uniqueDepartments = filter(doesExist, productsArray)
+    ##Get a full list of departments
+    for product in productsArray:
+        departmentList.append(product.get("department"))
 
-    for s in uniqueDepartments:
-        print(s)
-        
+    for department in departmentList:
+        addToUniqueDepartments(department)
+
     #Title
     print("--------------")
-    print("THERE ARE " + str(len(productsArray)) + " PRODUCTS: ")
+    print("THERE ARE " + str(len(uniqueDepartments)) + " DEPARTMENTS: ")
     print("--------------")
 
+    #Printing Content
+    for department in uniqueDepartments:
+        amount = departmentList.count(department)
+        if amount > 1:
+            print("+ " + department.title() + " (" + str(amount) + " products)")
+        else: 
+            print("+ " + department.title() + " (" + str(amount) + " product)")
 
-    
 
-#printItemList(products)
+printItemList(products)
 getDepartments(products)
