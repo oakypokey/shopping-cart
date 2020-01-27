@@ -48,6 +48,30 @@ def printItemList(productsArray):
 
     for item in productsArray:
         print("+ " + item.get("name") + " (" + to_usd(item.get("price")) + ")")
+
+def getDepartments(productsArray):
+    #Pre-processing
+    ## Filter function
+    uniqueDepartments = []
+
+    def doesExist(department):
+        if department in uniqueDepartments:
+            return False
+        else:
+            return True
+
+    uniqueDepartments = filter(doesExist, productsArray)
+
+    for s in uniqueDepartments:
+        print(s)
+        
+    #Title
+    print("--------------")
+    print("THERE ARE " + str(len(productsArray)) + " PRODUCTS: ")
+    print("--------------")
+
+
     
 
-printItemList(products)
+#printItemList(products)
+getDepartments(products)
