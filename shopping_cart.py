@@ -14,7 +14,7 @@ class MyItem:
 
 #Set up
 itemCode = '' #Init itemCode
-itemList = [] #Where the serial numbers of the items that are scanned will be stored
+basket = [] #Where the serial numbers of the items that are scanned will be stored
 itemDictionary = dict() #Where all the objects from items.csv will be stored
 NYC_TAXRATE = 0.0875
 
@@ -40,9 +40,9 @@ def printReceipt(arrayOfItems):
     print("CHECKOUT AT: " + datetime.datetime.now().strftime("%D %I:%M%p"))
     print("---------------------------------")
     print("SELECTED PRODUCTS: ")
-    for item in itemList:
+    for item in basket: #while iterating through and printing all the items, add all the totals up!
         print("... " + itemDictionary[item].name + " (" + to_usd(float(itemDictionary[item].price)) + ")")
-        subtotal += float(itemDictionary[item].price)
+        subtotal += float(itemDictionary[item].price) #convert to float to preserve cents
         tax += float(itemDictionary[item].price) * NYC_TAXRATE
         total += float(itemDictionary[item].price) + (float(itemDictionary[item].price) * NYC_TAXRATE)
     print("---------------------------------")
@@ -71,14 +71,14 @@ while itemCode.upper() != "DONE":
     #Don't run any code if DONE is found
     if itemCode.upper() == "DONE":
         #Receipt will be printed
-        printReceipt(itemList)
+        printReceipt(basket)
     else:
         
         #Confirm that the item is in the library
         if itemCode in itemDictionary:
             #If it exists, confirm
             print(itemDictionary[itemCode].name + " was added to the basket")
-            itemList.append(itemCode)
+            basket.append(itemCode) #add to basket
         else:
             #If not, tell the user that it does not exist
             print("Item does not exist. Please add to inventory list")
