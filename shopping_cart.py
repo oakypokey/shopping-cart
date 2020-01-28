@@ -77,7 +77,7 @@ while itemCode.upper() != "DONE":
         #Confirm that the item is in the library
         if itemCode in itemDictionary:
             #If it exists, confirm
-            print("Item with serial " + itemCode + " was added to the basket")
+            print(itemDictionary[itemCode].name + " was added to the basket")
             itemList.append(itemCode)
         else:
             #If not, tell the user that it does not exist
