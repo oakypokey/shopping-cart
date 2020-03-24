@@ -72,7 +72,6 @@ def calculate_total_price(basket):
     }
 
 def find_product(itemCode):
-    print(itemCode)
     if itemCode in itemDictionary:
         return itemDictionary[itemCode]
     else:
