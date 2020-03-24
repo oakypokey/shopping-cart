@@ -37,7 +37,7 @@ def printReceipt(arrayOfItems):
     print("GREEN FOODS GROCERY")
     print("WWW.GREEN-FOODS-GROCERY.COM")
     print("---------------------------------")
-    print("CHECKOUT AT: " + getHumanFriendlyTimestamp(datetime.datetime.now()))
+    print("CHECKOUT AT: " + human_friendly_timestamp(datetime.datetime.now()))
     print("---------------------------------")
     print("SELECTED PRODUCTS: ")
     for item in basket: #while iterating through and printing all the items, add all the totals up!
@@ -53,7 +53,7 @@ def printReceipt(arrayOfItems):
     print("THANKS, SEE YOU AGAIN SOON!")
     print("---------------------------------")
 
-def getHumanFriendlyTimestamp(datetimeObject):
+def human_friendly_timestamp(datetimeObject):
     return datetimeObject.strftime("%D %I:%M%p")
 
 def to_usd(my_price):
