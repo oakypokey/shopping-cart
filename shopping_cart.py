@@ -29,9 +29,9 @@ for row in reader:
     itemDictionary[row[0]] = MyItem(row[0], row[1], row[2], row[3], row[4])
 
 def printReceipt(arrayOfItems):
-    subtotal = 0
-    tax = 0
-    total = 0
+    subtotal = 0.00
+    tax = 0.00
+    total = 0.00
 
     print("---------------------------------")
     print("GREEN FOODS GROCERY")
@@ -40,11 +40,15 @@ def printReceipt(arrayOfItems):
     print("CHECKOUT AT: " + human_friendly_timestamp(datetime.datetime.now()))
     print("---------------------------------")
     print("SELECTED PRODUCTS: ")
+
     for item in basket: #while iterating through and printing all the items, add all the totals up!
-        print("... " + itemDictionary[item].name + " (" + to_usd(float(itemDictionary[item].price)) + ")")
-        subtotal += float(itemDictionary[item].price) #convert to float to preserve cents
-        tax += float(itemDictionary[item].price) * NYC_TAXRATE
-        total += float(itemDictionary[item].price) + (float(itemDictionary[item].price) * NYC_TAXRATE)
+        product = find_product(item)
+        print("... " + product.name + " (" + to_usd(float(product.price)) + ")")
+
+        subtotal += float(product.price) #convert to float to preserve cents
+        tax += float(product.price) * NYC_TAXRATE
+        total += float(product.price) + (float(product.price) * NYC_TAXRATE)
+
     print("---------------------------------")
     print("SUBTOTAL: " + str(to_usd(subtotal)))
     print("TAX: " + str(to_usd(tax)))
@@ -55,6 +59,13 @@ def printReceipt(arrayOfItems):
 
 def human_friendly_timestamp(datetimeObject):
     return datetimeObject.strftime("%D %I:%M%p")
+
+def find_product(itemCode):
+    print(itemCode)
+    if itemCode in itemDictionary:
+        return itemDictionary[itemCode]
+    else:
+        raise ValueError()
 
 def to_usd(my_price):
     """
