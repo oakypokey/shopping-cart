@@ -29,10 +29,8 @@ for row in reader:
     itemDictionary[row[0]] = MyItem(row[0], row[1], row[2], row[3], row[4])
 
 def printReceipt(arrayOfItems):
-    subtotal = 0.00
-    tax = 0.00
-    total = 0.00
 
+    totals = calculate_total_price(basket)
     print("---------------------------------")
     print("GREEN FOODS GROCERY")
     print("WWW.GREEN-FOODS-GROCERY.COM")
@@ -41,18 +39,14 @@ def printReceipt(arrayOfItems):
     print("---------------------------------")
     print("SELECTED PRODUCTS: ")
 
-    for item in basket: #while iterating through and printing all the items, add all the totals up!
+    for item in basket: #iterating through and printing all the items
         product = find_product(item)
         print("... " + product.name + " (" + to_usd(float(product.price)) + ")")
 
-        subtotal += float(product.price) #convert to float to preserve cents
-        tax += float(product.price) * NYC_TAXRATE
-        total += float(product.price) + (float(product.price) * NYC_TAXRATE)
-
     print("---------------------------------")
-    print("SUBTOTAL: " + str(to_usd(subtotal)))
-    print("TAX: " + str(to_usd(tax)))
-    print("TOTAL: " + str(to_usd(total)))
+    print("SUBTOTAL: " + str(to_usd(totals["subtotal"])))
+    print("TAX: " + str(to_usd(totals["tax"])))
+    print("TOTAL: " + str(to_usd(totals["total"])))
     print("---------------------------------")
     print("THANKS, SEE YOU AGAIN SOON!")
     print("---------------------------------")
@@ -60,8 +54,24 @@ def printReceipt(arrayOfItems):
 def human_friendly_timestamp(datetimeObject):
     return datetimeObject.strftime("%D %I:%M%p")
 
+def calculate_total_price(basket):
+    subtotal = 0.00
+    tax = 0.00
+    total = 0.00
+
+    for item in basket: #while iterating through and printing all the items, add all the totals up!
+        product = find_product(item)
+        subtotal += float(product.price) #convert to float to preserve cents
+        tax += float(product.price) * NYC_TAXRATE
+        total += float(product.price) + (float(product.price) * NYC_TAXRATE)
+    
+    return {
+        "subtotal": subtotal,
+        "tax": tax,
+        "total": total
+    }
+
 def find_product(itemCode):
-    print(itemCode)
     if itemCode in itemDictionary:
         return itemDictionary[itemCode]
     else:
