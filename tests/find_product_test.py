@@ -9,7 +9,8 @@ def test_find_product_valid():
 
 def test_find_product_invalid():
     try:
-        result = find_product("1")
-        assert result.serial == "1" and result.name == "Chocolate Sandwich Cookies"
-    except:
+        result = find_product("40")
         assert False
+    except:
+        assert True
+
