@@ -37,7 +37,7 @@ def printReceipt(arrayOfItems):
     print("GREEN FOODS GROCERY")
     print("WWW.GREEN-FOODS-GROCERY.COM")
     print("---------------------------------")
-    print("CHECKOUT AT: " + datetime.datetime.now().strftime("%D %I:%M%p"))
+    print("CHECKOUT AT: " + getHumanFriendlyTimestamp(datetime.datetime.now()))
     print("---------------------------------")
     print("SELECTED PRODUCTS: ")
     for item in basket: #while iterating through and printing all the items, add all the totals up!
@@ -53,6 +53,8 @@ def printReceipt(arrayOfItems):
     print("THANKS, SEE YOU AGAIN SOON!")
     print("---------------------------------")
 
+def getHumanFriendlyTimestamp(datetimeObject):
+    return datetimeObject.strftime("%D %I:%M%p")
 
 def to_usd(my_price):
     """
@@ -64,21 +66,22 @@ def to_usd(my_price):
     """
     return f"${my_price:,.2f}" #> $12,000.71
 
-while itemCode.upper() != "DONE":
-    #Get the item code from the command line
-    itemCode = input("Input the serial number for the item, or enter DONE if there are no more items left: ")
+if __name__ == "__main__":
+    while itemCode.upper() != "DONE":
+        #Get the item code from the command line
+        itemCode = input("Input the serial number for the item, or enter DONE if there are no more items left: ")
 
-    #Don't run any code if DONE is found
-    if itemCode.upper() == "DONE":
-        #Receipt will be printed
-        printReceipt(basket)
-    else:
-        
-        #Confirm that the item is in the library
-        if itemCode in itemDictionary:
-            #If it exists, confirm
-            print(itemDictionary[itemCode].name + " was added to the basket")
-            basket.append(itemCode) #add to basket
+        #Don't run any code if DONE is found
+        if itemCode.upper() == "DONE":
+            #Receipt will be printed
+            printReceipt(basket)
         else:
-            #If not, tell the user that it does not exist
-            print("Item does not exist. Please add to inventory list")
+            
+            #Confirm that the item is in the library
+            if itemCode in itemDictionary:
+                #If it exists, confirm
+                print(itemDictionary[itemCode].name + " was added to the basket")
+                basket.append(itemCode) #add to basket
+            else:
+                #If not, tell the user that it does not exist
+                print("Item does not exist. Please add to inventory list")
