@@ -23,3 +23,7 @@ def test_to_usd_isLongFloat():
 def test_to_usd_isNegative():
     result = to_usd(-1.23)
     assert result == '$-1.23'
+
+def test_to_usd_thousandsSeperator():
+    result = to_usd(1000)
+    assert len(result.split(",")) > 1
