@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/oakypokey/shopping-cart.svg?branch=master)](https://travis-ci.com/oakypokey/shopping-cart)[![Maintainability](https://api.codeclimate.com/v1/badges/99e92fa245e9f30e342c/maintainability)](https://codeclimate.com/github/oakypokey/shopping-cart/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/99e92fa245e9f30e342c/test_coverage)](https://codeclimate.com/github/oakypokey/shopping-cart/test_coverage)
+[![Build Status](https://travis-ci.com/oakypokey/shopping-cart.svg?branch=master)](https://travis-ci.com/oakypokey/shopping-cart)   [![Maintainability](https://api.codeclimate.com/v1/badges/99e92fa245e9f30e342c/maintainability)](https://codeclimate.com/github/oakypokey/shopping-cart/maintainability)    [![Test Coverage](https://api.codeclimate.com/v1/badges/99e92fa245e9f30e342c/test_coverage)](https://codeclimate.com/github/oakypokey/shopping-cart/test_coverage)
 
 # Shopping Cart Checkout
 
