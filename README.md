@@ -17,4 +17,4 @@ pip install -r requirements.txt
 python app/robo-advisor.py
 ```
 
-6. Follow the instructions in the program itself.
+3. Follow the instructions in the program itself.
