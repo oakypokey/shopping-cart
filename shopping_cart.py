@@ -4,6 +4,11 @@ import datetime
 
 #Object Definition
 class MyItem:
+    """
+    Item object that stores the information about the item
+    
+    Params: serial (string),name (string), aisle (string), department (string), price (string)
+    """
     def __init__(self,serial,name, aisle, department, price):
         self.serial = serial
         self.name = name
@@ -29,8 +34,15 @@ for row in reader:
     itemDictionary[row[0]] = MyItem(row[0], row[1], row[2], row[3], row[4])
 
 def printReceipt(arrayOfItems):
+    """
+    Prints the receipt given a basket of items.
+    
+    Param: Array of itemCodes
+    Example: printReceipt(["1", "2", "3"])
+    Returns: NULL
+    """
 
-    totals = calculate_total_price(basket)
+    totals = calculate_total_price(arrayOfItems)
     print("---------------------------------")
     print("GREEN FOODS GROCERY")
     print("WWW.GREEN-FOODS-GROCERY.COM")
@@ -39,7 +51,7 @@ def printReceipt(arrayOfItems):
     print("---------------------------------")
     print("SELECTED PRODUCTS: ")
 
-    for item in basket: #iterating through and printing all the items
+    for item in arrayOfItems: #iterating through and printing all the items
         product = find_product(item)
         print("... " + product.name + " (" + to_usd(float(product.price)) + ")")
 
@@ -55,6 +67,17 @@ def human_friendly_timestamp(datetimeObject):
     return datetimeObject.strftime("%D %I:%M%p")
 
 def calculate_total_price(basket):
+    """
+    Calculates the subtotals of a shopping basket and returns a dict with the totals
+    
+    Param: Array of itemCodes
+    Example: calculate_total_price(["1", "2", "3"])
+    Returns: {
+        "subtotal": 100.00,
+        "tax": 8.75,
+        "total": 108.75 
+    }
+    """
     subtotal = 0.00
     tax = 0.00
     total = 0.00
@@ -72,6 +95,14 @@ def calculate_total_price(basket):
     }
 
 def find_product(itemCode):
+    """
+    Finds the product in the dictionary and returns it
+   
+    Param: itemCode in the form a string.
+    Example: find_product("2")
+    Returns: MyItem Object
+    """
+
     if itemCode in itemDictionary:
         return itemDictionary[itemCode]
     else:
